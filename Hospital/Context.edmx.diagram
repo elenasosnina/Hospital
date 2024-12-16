@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41efae0ba6cf46cf93b0bd21ecef75d2" Name="Diagram1">
+        <EntityTypeShape EntityType="HospitalModel.C_Procedures" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Appointments" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Diseases" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Doctors" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.DoctorSchedule" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.MedicalRecords" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Patients" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Record_an_Appointment" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Recording_a_procedure" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.ServicesCost" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="HospitalModel.FK__Recording__Proce__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__ServicesC__Proce__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__Appointme__Recor__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__Recording__Appoi__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__MedicalRe__Disea__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__DoctorSch__Docto__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__Record_an__Docto__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__MedicalRe__Patie__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__Record_an__Patie__571DF1D5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
