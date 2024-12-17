@@ -12,15 +12,18 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class Recording_a_procedure
+    public partial class Болезни
     {
-        public int Recording_a_procedureID { get; set; }
-        public Nullable<int> AppointmentID { get; set; }
-        public Nullable<int> ProcedureID { get; set; }
-        public System.DateTime Date_and_time { get; set; }
-        public string C_Description { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Болезни()
+        {
+            this.Медицинские_карты = new HashSet<Медицинские_карты>();
+        }
     
-        public virtual C_Procedures C_Procedures { get; set; }
-        public virtual Appointments Appointments { get; set; }
+        public int ID_болезни { get; set; }
+        public string Название { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Медицинские_карты> Медицинские_карты { get; set; }
     }
 }

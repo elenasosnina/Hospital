@@ -12,15 +12,17 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class MedicalRecords
+    public partial class Запись_на_приемы
     {
-        public int MedicalRecordID { get; set; }
-        public Nullable<int> PatientID { get; set; }
-        public Nullable<int> DiseaseID { get; set; }
-        public int CardNumber { get; set; }
-        public string BloodType { get; set; }
+        public int ID_записи_на_прием { get; set; }
+        public Nullable<int> ID_врача { get; set; }
+        public System.DateTime Дата_и_время { get; set; }
+        public string Описание { get; set; }
+        public Nullable<int> ID_услуги { get; set; }
+        public Nullable<int> ID_пациента { get; set; }
     
-        public virtual Diseases Diseases { get; set; }
-        public virtual Patients Patients { get; set; }
+        public virtual Врачи Врачи { get; set; }
+        public virtual Пациенты Пациенты { get; set; }
+        public virtual Услуги Услуги { get; set; }
     }
 }

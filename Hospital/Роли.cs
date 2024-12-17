@@ -12,13 +12,18 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class ServicesCost
+    public partial class Роли
     {
-        public int ServiceCostID { get; set; }
-        public Nullable<int> ProcedureID { get; set; }
-        public decimal Cost { get; set; }
-        public string Discount { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Роли()
+        {
+            this.Пользователи = new HashSet<Пользователи>();
+        }
     
-        public virtual C_Procedures C_Procedures { get; set; }
+        public int ID_роли { get; set; }
+        public string Название { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пользователи> Пользователи { get; set; }
     }
 }

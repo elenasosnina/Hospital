@@ -12,19 +12,22 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class Diseases
+    public partial class Услуги
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Diseases()
+        public Услуги()
         {
-            this.MedicalRecords = new HashSet<MedicalRecords>();
+            this.Запись_на_приемы = new HashSet<Запись_на_приемы>();
+            this.Стоимость_услуг = new HashSet<Стоимость_услуг>();
         }
     
-        public int DiseaseID { get; set; }
-        public string DiseaseName { get; set; }
-        public string Result { get; set; }
+        public int ID_услуги { get; set; }
+        public string Описание { get; set; }
+        public string Результат { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicalRecords> MedicalRecords { get; set; }
+        public virtual ICollection<Запись_на_приемы> Запись_на_приемы { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Стоимость_услуг> Стоимость_услуг { get; set; }
     }
 }

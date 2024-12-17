@@ -12,25 +12,28 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class Doctors
+    public partial class Пациенты
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Doctors()
+        public Пациенты()
         {
-            this.DoctorSchedule = new HashSet<DoctorSchedule>();
-            this.Record_an_Appointment = new HashSet<Record_an_Appointment>();
+            this.Запись_на_приемы = new HashSet<Запись_на_приемы>();
+            this.Медицинские_карты = new HashSet<Медицинские_карты>();
         }
     
-        public int DoctorID { get; set; }
-        public string Surname { get; set; }
-        public string DoctorName { get; set; }
-        public string Patronymic { get; set; }
-        public string Specialty { get; set; }
-        public int Сabinet { get; set; }
+        public int ID_пациента { get; set; }
+        public string Фамилия { get; set; }
+        public string Имя { get; set; }
+        public string Отчество { get; set; }
+        public System.DateTime Дата_рождения { get; set; }
+        public string Пол { get; set; }
+        public string Телефон { get; set; }
+        public Nullable<int> ID_пользователя { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DoctorSchedule> DoctorSchedule { get; set; }
+        public virtual ICollection<Запись_на_приемы> Запись_на_приемы { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Record_an_Appointment> Record_an_Appointment { get; set; }
+        public virtual ICollection<Медицинские_карты> Медицинские_карты { get; set; }
+        public virtual Пользователи Пользователи { get; set; }
     }
 }

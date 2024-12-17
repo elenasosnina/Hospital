@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Hospital"
         mc:Ignorable="d"
         Title="Главная" Height="450" Width="800">
-    <Frame NavigationUIVisibility="Hidden"  Source="../Pages/TimetablePage.xaml"/>
+    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"  Source="../Pages/TimetablePage.xaml"/>
 </Window>

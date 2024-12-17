@@ -25,15 +25,15 @@ namespace Hospital
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C_Procedures> C_Procedures { get; set; }
-        public virtual DbSet<Appointments> Appointments { get; set; }
-        public virtual DbSet<Diseases> Diseases { get; set; }
-        public virtual DbSet<Doctors> Doctors { get; set; }
-        public virtual DbSet<DoctorSchedule> DoctorSchedule { get; set; }
-        public virtual DbSet<MedicalRecords> MedicalRecords { get; set; }
-        public virtual DbSet<Patients> Patients { get; set; }
-        public virtual DbSet<Record_an_Appointment> Record_an_Appointment { get; set; }
-        public virtual DbSet<Recording_a_procedure> Recording_a_procedure { get; set; }
-        public virtual DbSet<ServicesCost> ServicesCost { get; set; }
+        public virtual DbSet<Болезни> Болезни { get; set; }
+        public virtual DbSet<Врачи> Врачи { get; set; }
+        public virtual DbSet<Запись_на_приемы> Запись_на_приемы { get; set; }
+        public virtual DbSet<Медицинские_карты> Медицинские_карты { get; set; }
+        public virtual DbSet<Пациенты> Пациенты { get; set; }
+        public virtual DbSet<Пользователи> Пользователи { get; set; }
+        public virtual DbSet<Расписание_врачей> Расписание_врачей { get; set; }
+        public virtual DbSet<Роли> Роли { get; set; }
+        public virtual DbSet<Стоимость_услуг> Стоимость_услуг { get; set; }
+        public virtual DbSet<Услуги> Услуги { get; set; }
     }
 }

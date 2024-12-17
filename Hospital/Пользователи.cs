@@ -12,23 +12,24 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class Record_an_Appointment
+    public partial class Пользователи
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Record_an_Appointment()
+        public Пользователи()
         {
-            this.Appointments = new HashSet<Appointments>();
+            this.Врачи = new HashSet<Врачи>();
+            this.Пациенты = new HashSet<Пациенты>();
         }
     
-        public int Record_an_AppointmentID { get; set; }
-        public Nullable<int> DoctorID { get; set; }
-        public Nullable<int> PatientID { get; set; }
-        public System.DateTime Date_and_time { get; set; }
-        public string C_Description { get; set; }
+        public int ID_пользователя { get; set; }
+        public string Логин { get; set; }
+        public string Пароль { get; set; }
+        public Nullable<int> ID_роли { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointments> Appointments { get; set; }
-        public virtual Doctors Doctors { get; set; }
-        public virtual Patients Patients { get; set; }
+        public virtual ICollection<Врачи> Врачи { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пациенты> Пациенты { get; set; }
+        public virtual Роли Роли { get; set; }
     }
 }
