@@ -22,13 +22,13 @@
                 <Label  Content="Время начала"  Margin="0"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="SH" Width="30"/>
-                    <TextBlock Text=":" Margin="15,0"/>
+                    <TextBlock Text=":" Margin="8"/>
                     <TextBox x:Name="SM" Width="30"/>
                 </StackPanel>
                 <Label  Content="Время начала"  Margin="0"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="EH" Width="30"/>
-                    <TextBlock Text=":" Margin="15,0"/>
+                    <TextBlock Text=":" Margin="8"/>
                     <TextBox x:Name="EM" Width="30"/>
                 </StackPanel>
             </StackPanel>

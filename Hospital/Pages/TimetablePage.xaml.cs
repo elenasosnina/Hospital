@@ -69,8 +69,31 @@ namespace Hospital.Pages
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-           
-            
+            dynamic selectedItem = time_table.SelectedItem;
+            if (selectedItem != null)
+            {
+                // Создаем экземпляр CardPage и передаем выбранную книгу
+                AddTimetablePage cardPage = new AddTimetablePage(selectedItem);
+
+                // Создаем окно авторизации и передаем заголовок
+                FormWindow authWindow = new FormWindow
+                {
+                    Title = "Изменить данные врача"
+                };
+
+                // Навигируем на CardPage
+                authWindow.FormFrameWindow.Navigate(cardPage);
+                authWindow.Show();
+                authWindow.Closed += (s, args) =>
+                {
+                    Page_Loaded(sender, e);
+                };
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, выберите книгу для обновления.");
+            }
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -89,6 +112,7 @@ namespace Hospital.Pages
                              doc.Отчество,
                              doc.Специальность,
                              doc.Кабинет,
+                             doc.ID_врача,
                              timeTable.День_недели,
                              timeTable.Время_начало,
                              timeTable.Время_окончания,
