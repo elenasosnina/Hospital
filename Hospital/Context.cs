@@ -8,7 +8,6 @@ namespace Hospital
 {
     partial class Context
     {
-        public static Context DB { get;} = new Context();
+        public static Context DB { get; } = new Context();
     }
 }
-

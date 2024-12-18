@@ -79,6 +79,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddTimetablePage.xaml.cs">
+      <DependentUpon>AddTimetablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PatientsPage.xaml.cs">
       <DependentUpon>PatientsPage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
     <Compile Include="Услуги.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddTimetablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PatientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

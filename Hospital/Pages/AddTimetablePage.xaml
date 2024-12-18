@@ -1,0 +1,41 @@
+﻿<Page x:Class="Hospital.Pages.AddTimetablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="280" d:DesignWidth="400"
+      Title="Добавление нового врача">
+
+    <Grid>
+        <StackPanel x:Name="grid">
+            <Label Content="Врач"  Margin="15 0"/>
+            <TextBox  GotFocus="doctor_GotFocus" LostFocus="doctor_LostFocus" x:Name="doctor" Margin="15 0" />
+            <Label Content="Специальность "  Margin="15 0"/>
+            <TextBox   x:Name="speciality"  Margin="15 0" />
+            <Label  Content="Кабинет" Margin="15 0"/>
+            <TextBox   x:Name="cabinet"  TextWrapping="Wrap" Margin="15 0"/>
+            <Label  Content="Дни недели"  Margin="15 0"/>
+            <TextBox   x:Name="days"  Margin="15, 0,15, 10"/>
+            <StackPanel Orientation="Horizontal" Margin="15 0">
+                <Label  Content="Время начала"  Margin="0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="SH" Width="30"/>
+                    <TextBlock Text=":" Margin="15,0"/>
+                    <TextBox x:Name="SM" Width="30"/>
+                </StackPanel>
+                <Label  Content="Время начала"  Margin="0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="EH" Width="30"/>
+                    <TextBlock Text=":" Margin="15,0"/>
+                    <TextBox x:Name="EM" Width="30"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button   Content="Добавить"  Margin="20,10,15,15" FontSize="14" Click="Add_Click" />
+                <Button Content="Отмена" Margin="15,10,15,15" FontSize="14" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

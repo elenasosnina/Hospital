@@ -9,10 +9,10 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Авторизация" Margin="100,5,90,5" FontSize="30"/>
-            <TextBlock Text="Логин" Margin="30,0,30,0" FontSize="20"/>
-            <TextBox Margin="30,5,30,5" FontSize="20"/>
-            <TextBlock Text="Пароль" Margin="30,5,30,5" FontSize="20"/>
-            <TextBox Margin="30,5,30,5" FontSize="20"/>
+            <TextBlock  Text="Логин" Margin="30,0,30,0" FontSize="20"/>
+            <TextBox x:Name="Login" Margin="30,5,30,5" FontSize="20"/>
+            <TextBlock  Text="Пароль" Margin="30,5,30,5" FontSize="20"/>
+            <PasswordBox x:Name="Password" Margin="30,5,30,5" FontSize="20"/>
             <Button Content="Войти" BorderThickness="2"  BorderBrush="Gray" Background="Transparent"  FontSize="20" VerticalAlignment="Center" Width="100" Height="40" Margin="100,15,100,0" Click="Button_Click"/>
         </StackPanel>
     </Grid>

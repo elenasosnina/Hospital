@@ -24,5 +24,13 @@ namespace Hospital.Pages
         {
             InitializeComponent();
         }
+
+        private void Timetable_Click(object sender, RoutedEventArgs e)
+        {
+            TimetablePage table = new TimetablePage();
+            MainWindow w = (MainWindow)Window.GetWindow(this);
+            w.Title = table.Title;
+            w.MainFrame.Navigate(table);
+        }
     }
 }

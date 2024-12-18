@@ -14,16 +14,7 @@ namespace Hospital
     
     public partial class Болезни
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Болезни()
-        {
-            this.Медицинские_карты = new HashSet<Медицинские_карты>();
-        }
-    
         public int ID_болезни { get; set; }
         public string Название { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Медицинские_карты> Медицинские_карты { get; set; }
     }
 }

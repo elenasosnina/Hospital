@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using Hospital;
+using Hospital.Windows;
 
 namespace Hospital.Pages
 {
@@ -30,7 +31,12 @@ namespace Hospital.Pages
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
+            FormWindow form = new FormWindow();
+            form.Show();
+            form.Closed += (s, args) =>
+            {
+                Page_Loaded(sender, e);
+            };
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -63,7 +69,8 @@ namespace Hospital.Pages
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-
+           
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

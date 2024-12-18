@@ -16,12 +16,10 @@ namespace Hospital
     {
         public int ID_медицинской_карты { get; set; }
         public Nullable<int> ID_пациента { get; set; }
-        public Nullable<int> ID_болезни { get; set; }
         public string Номер_карты { get; set; }
         public string Группа_крови { get; set; }
         public string Результат_болезни { get; set; }
     
-        public virtual Болезни Болезни { get; set; }
         public virtual Пациенты Пациенты { get; set; }
     }
 }
