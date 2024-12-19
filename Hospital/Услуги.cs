@@ -18,6 +18,7 @@ namespace Hospital
         public Услуги()
         {
             this.Запись_на_приемы = new HashSet<Запись_на_приемы>();
+            this.Стоимость_услуг = new HashSet<Стоимость_услуг>();
         }
     
         public int ID_услуги { get; set; }
@@ -25,6 +26,7 @@ namespace Hospital
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Запись_на_приемы> Запись_на_приемы { get; set; }
-        public virtual Стоимость_услуг Стоимость_услуг { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Стоимость_услуг> Стоимость_услуг { get; set; }
     }
 }

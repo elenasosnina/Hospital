@@ -12,18 +12,14 @@ namespace Hospital
     using System;
     using System.Collections.Generic;
     
-    public partial class Болезни
+    public partial class Болезни_Медицинская_карта
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Болезни()
-        {
-            this.Болезни_Медицинская_карта = new HashSet<Болезни_Медицинская_карта>();
-        }
-    
+        public int ID_болезни_мед_карта { get; set; }
         public int ID_болезни { get; set; }
-        public string Название { get; set; }
+        public int ID_медицинской_карты { get; set; }
+        public string Результат_болезни { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Болезни_Медицинская_карта> Болезни_Медицинская_карта { get; set; }
+        public virtual Болезни Болезни { get; set; }
+        public virtual Медицинские_карты Медицинские_карты { get; set; }
     }
 }

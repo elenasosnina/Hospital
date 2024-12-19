@@ -82,8 +82,14 @@
     <Compile Include="Pages\AddTimetablePage.xaml.cs">
       <DependentUpon>AddTimetablePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PatientsPage.xaml.cs">
-      <DependentUpon>PatientsPage.xaml</DependentUpon>
+    <Compile Include="Pages\MedCardPage.xaml.cs">
+      <DependentUpon>MedCardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrationReceptionPage.xaml.cs">
+      <DependentUpon>RegistrationReceptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ServicesPage.xaml.cs">
+      <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TimetablePage.xaml.cs">
       <DependentUpon>TimetablePage.xaml</DependentUpon>
@@ -92,6 +98,9 @@
       <DependentUpon>FormWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Болезни.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Болезни_Медицинская_карта.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Врачи.cs">
@@ -125,7 +134,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PatientsPage.xaml">
+    <Page Include="Pages\MedCardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegistrationReceptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ServicesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

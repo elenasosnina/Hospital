@@ -91,7 +91,7 @@ namespace Hospital.Pages
             }
             else
             {
-                System.Windows.MessageBox.Show("Пожалуйста, выберите книгу для обновления.");
+                System.Windows.MessageBox.Show("Пожалуйста, выберите элемент для обновления.");
             }
 
         }
@@ -121,12 +121,12 @@ namespace Hospital.Pages
             time_table.ItemsSource = result.ToList();
         }
 
-        private void Patients_Click(object sender, RoutedEventArgs e)
+        private void MedCard_Click(object sender, RoutedEventArgs e)
         {
-            PatientsPage doc = new PatientsPage();
+            MedCardPage card = new MedCardPage();
             MainWindow w = (MainWindow)Window.GetWindow(this);
-            w.Title = doc.Title;
-            w.MainFrame.Navigate(doc);
+            w.Title = card.Title;
+            w.MainFrame.Navigate(card);
         }
         private void Find_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -155,5 +155,20 @@ namespace Hospital.Pages
             time_table.ItemsSource = searchResult.ToList();
         }
 
+        private void Services_Click(object sender, RoutedEventArgs e)
+        {
+            ServicesPage servicce = new ServicesPage();
+            MainWindow w = (MainWindow)Window.GetWindow(this);
+            w.Title = servicce.Title;
+            w.MainFrame.Navigate(servicce);
+        }
+
+        private void RegistrationReception_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationReceptionPage reg = new RegistrationReceptionPage();
+            MainWindow w = (MainWindow)Window.GetWindow(this);
+            w.Title = reg.Title;
+            w.MainFrame.Navigate(reg);
+        }
     }
 }

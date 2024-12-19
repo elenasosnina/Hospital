@@ -26,6 +26,7 @@ namespace Hospital
         }
     
         public virtual DbSet<Болезни> Болезни { get; set; }
+        public virtual DbSet<Болезни_Медицинская_карта> Болезни_Медицинская_карта { get; set; }
         public virtual DbSet<Врачи> Врачи { get; set; }
         public virtual DbSet<Запись_на_приемы> Запись_на_приемы { get; set; }
         public virtual DbSet<Медицинские_карты> Медицинские_карты { get; set; }

@@ -12,12 +12,15 @@
           <Property Name="ID_болезни" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Название" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "Больница.dbo.Болезни_Медицинская_карта" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
         <EntityType Name="Болезни_Медицинская_карта">
-          <Property Name="ID_болезни" Type="int" />
-          <Property Name="ID_медицинской_карты" Type="int" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="ID_болезни_мед_карта" />
+          </Key>
+          <Property Name="ID_болезни_мед_карта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_болезни" Type="int" Nullable="false" />
+          <Property Name="ID_медицинской_карты" Type="int" Nullable="false" />
+          <Property Name="Результат_болезни" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Врачи">
           <Key>
             <PropertyRef Name="ID_врача" />
@@ -49,7 +52,6 @@
           <Property Name="ID_пациента" Type="int" />
           <Property Name="Номер_карты" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Группа_крови" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Результат_болезни" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Пациенты">
           <Key>
@@ -97,7 +99,7 @@
           <Property Name="ID_стоимости_услуги" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_услуги" Type="int" />
           <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Скидка" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Скидка" Type="decimal" Precision="5" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Услуги">
           <Key>
@@ -191,23 +193,41 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Стоимость__ID_ус__5BE2A6F2">
-          <End Role="Услуги" Type="Self.Услуги" Multiplicity="1" />
-          <End Role="Стоимость_услуг" Type="Self.Стоимость_услуг" Multiplicity="0..1" />
+          <End Role="Услуги" Type="Self.Услуги" Multiplicity="0..1" />
+          <End Role="Стоимость_услуг" Type="Self.Стоимость_услуг" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Услуги">
               <PropertyRef Name="ID_услуги" />
             </Principal>
             <Dependent Role="Стоимость_услуг">
-              <PropertyRef Name="ID_стоимости_услуги" />
+              <PropertyRef Name="ID_услуги" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Ошибки, обнаруженные при создании:
-ошибка 6004: Невозможно найти таблицу "Больница.dbo.Болезни_Медицинская_карта", на которую ссылается связь.
-        <Association Name="FK_Болезни_Медицинская_карта_Болезни" />-->
-        <!--Ошибки, обнаруженные при создании:
-ошибка 6004: Невозможно найти таблицу "Больница.dbo.Болезни_Медицинская_карта", на которую ссылается связь.
-        <Association Name="FK_Болезни_Медицинская_карта_Медицинские_карты" />-->
+        <Association Name="FK_Болезни_Медицинская_карта_Болезни">
+          <End Role="Болезни" Type="Self.Болезни" Multiplicity="1" />
+          <End Role="Болезни_Медицинская_карта" Type="Self.Болезни_Медицинская_карта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Болезни">
+              <PropertyRef Name="ID_болезни" />
+            </Principal>
+            <Dependent Role="Болезни_Медицинская_карта">
+              <PropertyRef Name="ID_болезни" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Болезни_Медицинская_карта_Медицинские_карты">
+          <End Role="Медицинские_карты" Type="Self.Медицинские_карты" Multiplicity="1" />
+          <End Role="Болезни_Медицинская_карта" Type="Self.Болезни_Медицинская_карта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Медицинские_карты">
+              <PropertyRef Name="ID_медицинской_карты" />
+            </Principal>
+            <Dependent Role="Болезни_Медицинская_карта">
+              <PropertyRef Name="ID_медицинской_карты" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Медицинские_карты_Медицинские_карты1">
           <End Role="Пациенты" Type="Self.Пациенты" Multiplicity="0..1" />
           <End Role="Медицинские_карты" Type="Self.Медицинские_карты" Multiplicity="*" />
@@ -222,6 +242,7 @@
         </Association>
         <EntityContainer Name="Хранилище БольницаModelContainer">
           <EntitySet Name="Болезни" EntityType="Self.Болезни" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Болезни_Медицинская_карта" EntityType="Self.Болезни_Медицинская_карта" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Врачи" EntityType="Self.Врачи" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Запись_на_приемы" EntityType="Self.Запись_на_приемы" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Медицинские_карты" EntityType="Self.Медицинские_карты" Schema="dbo" store:Type="Tables" />
@@ -263,6 +284,14 @@
             <End Role="Услуги" EntitySet="Услуги" />
             <End Role="Стоимость_услуг" EntitySet="Стоимость_услуг" />
           </AssociationSet>
+          <AssociationSet Name="FK_Болезни_Медицинская_карта_Болезни" Association="Self.FK_Болезни_Медицинская_карта_Болезни">
+            <End Role="Болезни" EntitySet="Болезни" />
+            <End Role="Болезни_Медицинская_карта" EntitySet="Болезни_Медицинская_карта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Болезни_Медицинская_карта_Медицинские_карты" Association="Self.FK_Болезни_Медицинская_карта_Медицинские_карты">
+            <End Role="Медицинские_карты" EntitySet="Медицинские_карты" />
+            <End Role="Болезни_Медицинская_карта" EntitySet="Болезни_Медицинская_карта" />
+          </AssociationSet>
           <AssociationSet Name="FK_Медицинские_карты_Медицинские_карты1" Association="Self.FK_Медицинские_карты_Медицинские_карты1">
             <End Role="Пациенты" EntitySet="Пациенты" />
             <End Role="Медицинские_карты" EntitySet="Медицинские_карты" />
@@ -274,6 +303,7 @@
       <Schema Namespace="БольницаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Болезни" EntityType="БольницаModel.Болезни" />
+          <EntitySet Name="Болезни_Медицинская_карта" EntityType="БольницаModel.Болезни_Медицинская_карта" />
           <EntitySet Name="Врачи" EntityType="БольницаModel.Врачи" />
           <EntitySet Name="Запись_на_приемы" EntityType="БольницаModel.Запись_на_приемы" />
           <EntitySet Name="Медицинские_карты" EntityType="БольницаModel.Медицинские_карты" />
@@ -283,6 +313,14 @@
           <EntitySet Name="Роли" EntityType="БольницаModel.Роли" />
           <EntitySet Name="Стоимость_услуг" EntityType="БольницаModel.Стоимость_услуг" />
           <EntitySet Name="Услуги" EntityType="БольницаModel.Услуги" />
+          <AssociationSet Name="FK_Болезни_Медицинская_карта_Болезни" Association="БольницаModel.FK_Болезни_Медицинская_карта_Болезни">
+            <End Role="Болезни" EntitySet="Болезни" />
+            <End Role="Болезни_Медицинская_карта" EntitySet="Болезни_Медицинская_карта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Болезни_Медицинская_карта_Медицинские_карты" Association="БольницаModel.FK_Болезни_Медицинская_карта_Медицинские_карты">
+            <End Role="Медицинские_карты" EntitySet="Медицинские_карты" />
+            <End Role="Болезни_Медицинская_карта" EntitySet="Болезни_Медицинская_карта" />
+          </AssociationSet>
           <AssociationSet Name="FK__Врачи__ID_пользо__4E88ABD4" Association="БольницаModel.FK__Врачи__ID_пользо__4E88ABD4">
             <End Role="Пользователи" EntitySet="Пользователи" />
             <End Role="Врачи" EntitySet="Врачи" />
@@ -326,6 +364,18 @@
           </Key>
           <Property Name="ID_болезни" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Название" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Болезни_Медицинская_карта" Relationship="БольницаModel.FK_Болезни_Медицинская_карта_Болезни" FromRole="Болезни" ToRole="Болезни_Медицинская_карта" />
+        </EntityType>
+        <EntityType Name="Болезни_Медицинская_карта">
+          <Key>
+            <PropertyRef Name="ID_болезни_мед_карта" />
+          </Key>
+          <Property Name="ID_болезни_мед_карта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_болезни" Type="Int32" Nullable="false" />
+          <Property Name="ID_медицинской_карты" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Болезни" Relationship="БольницаModel.FK_Болезни_Медицинская_карта_Болезни" FromRole="Болезни_Медицинская_карта" ToRole="Болезни" />
+          <NavigationProperty Name="Медицинские_карты" Relationship="БольницаModel.FK_Болезни_Медицинская_карта_Медицинские_карты" FromRole="Болезни_Медицинская_карта" ToRole="Медицинские_карты" />
+          <Property Name="Результат_болезни" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Врачи">
           <Key>
@@ -364,7 +414,7 @@
           <Property Name="ID_пациента" Type="Int32" />
           <Property Name="Номер_карты" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Группа_крови" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Результат_болезни" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Болезни_Медицинская_карта" Relationship="БольницаModel.FK_Болезни_Медицинская_карта_Медицинские_карты" FromRole="Медицинские_карты" ToRole="Болезни_Медицинская_карта" />
           <NavigationProperty Name="Пациенты" Relationship="БольницаModel.FK_Медицинские_карты_Медицинские_карты1" FromRole="Медицинские_карты" ToRole="Пациенты" />
         </EntityType>
         <EntityType Name="Пациенты">
@@ -421,7 +471,7 @@
           <Property Name="ID_стоимости_услуги" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_услуги" Type="Int32" />
           <Property Name="Стоимость" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Скидка" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Скидка" Type="Decimal" Nullable="false" Precision="5" Scale="0" />
           <NavigationProperty Name="Услуги" Relationship="БольницаModel.FK__Стоимость__ID_ус__5BE2A6F2" FromRole="Стоимость_услуг" ToRole="Услуги" />
         </EntityType>
         <EntityType Name="Услуги">
@@ -433,6 +483,30 @@
           <NavigationProperty Name="Запись_на_приемы" Relationship="БольницаModel.FK__Запись_на__ID_ус__5FB337D6" FromRole="Услуги" ToRole="Запись_на_приемы" />
           <NavigationProperty Name="Стоимость_услуг" Relationship="БольницаModel.FK__Стоимость__ID_ус__5BE2A6F2" FromRole="Услуги" ToRole="Стоимость_услуг" />
         </EntityType>
+        <Association Name="FK_Болезни_Медицинская_карта_Болезни">
+          <End Type="БольницаModel.Болезни" Role="Болезни" Multiplicity="1" />
+          <End Type="БольницаModel.Болезни_Медицинская_карта" Role="Болезни_Медицинская_карта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Болезни">
+              <PropertyRef Name="ID_болезни" />
+            </Principal>
+            <Dependent Role="Болезни_Медицинская_карта">
+              <PropertyRef Name="ID_болезни" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Болезни_Медицинская_карта_Медицинские_карты">
+          <End Type="БольницаModel.Медицинские_карты" Role="Медицинские_карты" Multiplicity="1" />
+          <End Type="БольницаModel.Болезни_Медицинская_карта" Role="Болезни_Медицинская_карта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Медицинские_карты">
+              <PropertyRef Name="ID_медицинской_карты" />
+            </Principal>
+            <Dependent Role="Болезни_Медицинская_карта">
+              <PropertyRef Name="ID_медицинской_карты" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Врачи__ID_пользо__4E88ABD4">
           <End Type="БольницаModel.Пользователи" Role="Пользователи" Multiplicity="0..1" />
           <End Type="БольницаModel.Врачи" Role="Врачи" Multiplicity="*" />
@@ -530,14 +604,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Стоимость__ID_ус__5BE2A6F2">
-          <End Type="БольницаModel.Услуги" Role="Услуги" Multiplicity="1" />
-          <End Type="БольницаModel.Стоимость_услуг" Role="Стоимость_услуг" Multiplicity="0..1" />
+          <End Type="БольницаModel.Услуги" Role="Услуги" Multiplicity="0..1" />
+          <End Type="БольницаModel.Стоимость_услуг" Role="Стоимость_услуг" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Услуги">
               <PropertyRef Name="ID_услуги" />
             </Principal>
             <Dependent Role="Стоимость_услуг">
-              <PropertyRef Name="ID_стоимости_услуги" />
+              <PropertyRef Name="ID_услуги" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -552,6 +626,16 @@
               <MappingFragment StoreEntitySet="Болезни">
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="ID_болезни" ColumnName="ID_болезни" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Болезни_Медицинская_карта">
+            <EntityTypeMapping TypeName="БольницаModel.Болезни_Медицинская_карта">
+              <MappingFragment StoreEntitySet="Болезни_Медицинская_карта">
+                <ScalarProperty Name="Результат_болезни" ColumnName="Результат_болезни" />
+                <ScalarProperty Name="ID_медицинской_карты" ColumnName="ID_медицинской_карты" />
+                <ScalarProperty Name="ID_болезни" ColumnName="ID_болезни" />
+                <ScalarProperty Name="ID_болезни_мед_карта" ColumnName="ID_болезни_мед_карта" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -583,7 +667,6 @@
           <EntitySetMapping Name="Медицинские_карты">
             <EntityTypeMapping TypeName="БольницаModel.Медицинские_карты">
               <MappingFragment StoreEntitySet="Медицинские_карты">
-                <ScalarProperty Name="Результат_болезни" ColumnName="Результат_болезни" />
                 <ScalarProperty Name="Группа_крови" ColumnName="Группа_крови" />
                 <ScalarProperty Name="Номер_карты" ColumnName="Номер_карты" />
                 <ScalarProperty Name="ID_пациента" ColumnName="ID_пациента" />

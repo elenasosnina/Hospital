@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Hospital.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Расписание" Loaded="Page_Loaded">
+      Title="Расписание работы врачей" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,10 +16,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" >
-            <Button Content="Запись на прием" FontSize="20"  Padding="30,5,30,5"  />
-            <Button Content="Услуги" FontSize="20"  Padding="30,5,30,5"/>
-            <Button Content="Пациенты" Click="Patients_Click"  FontSize="20"  Padding="30,5,30,5" />
-            <Button Content="Медицинская карта" FontSize="20"  Padding="30,5,30,5" />
+            <Button Content="Записи на прием" FontSize="20"  Padding="30,5,30,5" Click="RegistrationReception_Click" />
+            <Button Content="Услуги" FontSize="20"  Padding="30,5,30,5" Click="Services_Click"/>
+            <Button Content="Медицинская карта" FontSize="20"  Padding="30,5,30,5" Click="MedCard_Click"/>
             <Button Content="Расписание" FontSize="20"  Padding="30,5,30,5" />
         </WrapPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
