@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Hospital.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Записи на прием">
+      Title="Записи на прием" Loaded="Page_Loaded">
 
 
     <Grid>
@@ -23,16 +23,79 @@
             <Button Content="Расписание" FontSize="20"  Padding="30,5,30,5" Click="Timetable_Click"/>
         </WrapPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <TextBox FontSize="20"   Width="300" Margin="10,20,10,20"/>
-            <Button Content="Найти" FontSize="20" Padding="30,5,30,5" HorizontalAlignment="Center" Margin="10,20,10,20"/>
+            <TextBox FontSize="20" x:Name="finder" TextChanged="Find_TextChanged"  Width="300" Margin="10,20,10,20"/>
+            <Button Content="Найти" FontSize="20" Padding="30,5,30,5" HorizontalAlignment="Center" Click="Search_Button" Margin="10,20,10,20"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Добавить" FontSize="20"  Padding="30,5,30,5" Margin="10,0,10,10" />
-            <Button Content="Удалить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" />
-            <Button Content="Изменить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" />
+            <Button Content="Добавить" FontSize="20"  Padding="30,5,30,5" Margin="10,0,10,10" Click="Add_Click"/>
+            <Button Content="Удалить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Delete_Click" />
+            <Button Content="Изменить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Change_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-
+            <ListView x:Name="table" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="2" BorderBrush="Gray" Margin="0,0,0,30">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Врач" Width="100" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="Century Gothic" TextWrapping="Wrap">
+                                        <TextBlock.Text >
+                                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                <Binding Path="Фамилия_доктора"/>
+                                                <Binding Path="Имя_доктора"/>
+                                                <Binding Path="Отчество_доктора"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Специальность" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="Century Gothic" Text="{Binding Специальность}" FontSize="14"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Дата и время" Width="180">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="Century Gothic" Text="{Binding Дата_и_время}" FontSize="14"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Пациент" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="Century Gothic" TextWrapping="WrapWithOverflow">
+                                        <TextBlock.Text  >
+                                            <MultiBinding  StringFormat="{}{0} {1} {2}">
+                                                <Binding Path="Фамилия"/>
+                                                <Binding Path="Имя"/>
+                                                <Binding Path="Отчество"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>                        
+                        <GridViewColumn Header="Описание" Width="120" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="WrapWithOverflow" FontFamily="Century Gothic" Text="{Binding Описание}" FontSize="14"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Услуга" Width="130" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="WrapWithOverflow" FontFamily="Century Gothic" Text="{Binding Название}" FontSize="14"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>

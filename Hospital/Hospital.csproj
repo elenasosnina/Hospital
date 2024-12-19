@@ -88,6 +88,9 @@
     <Compile Include="Pages\RegistrationReceptionPage.xaml.cs">
       <DependentUpon>RegistrationReceptionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RegReceptionFormPage.xaml.cs">
+      <DependentUpon>RegReceptionFormPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ServiceFormPage.xaml.cs">
       <DependentUpon>ServiceFormPage.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegistrationReceptionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegReceptionFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
