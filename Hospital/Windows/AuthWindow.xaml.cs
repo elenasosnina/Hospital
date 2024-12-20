@@ -23,7 +23,6 @@ namespace Hospital.Windows
             string login = Login.Text;
             string password = Password.Password;
 
-            // Проверка наличия введенных логина и пароля.
             if (string.IsNullOrWhiteSpace(login) && string.IsNullOrWhiteSpace(password))
             {
                 System.Windows.MessageBox.Show("Логин и пароль не могут быть пустыми строками!");
@@ -40,23 +39,12 @@ namespace Hospital.Windows
                 return;
             }
             var user = Context.DB.Пользователи.FirstOrDefault(x => x.Логин == login && x.Пароль == password && x.ID_роли == 2);
-            var user1 = Context.DB.Пользователи.FirstOrDefault(x => x.Логин == login && x.Пароль == password && x.ID_роли == 1);
+            var user1 = Context.DB.Пользователи.FirstOrDefault(x => x.Логин == login && x.Пароль == password && x.ID_роли == 3);
+            var user2 = Context.DB.Пользователи.FirstOrDefault(x => x.Логин == login && x.Пароль == password && x.ID_роли == 1);
             if (user1 != null)
             {
-                //CurrentUser.RoleID = 1;
-                //CurrentUser.UserID = user1.UserID;
-                var window = Window.GetWindow(this);
-                if (window != null)
-                {
-                    window.Hide();
-                }
-                MainWindow menuWindow = new MainWindow();
-                menuWindow.ShowDialog();
-            }
-            else if (user != null)
-            {
-                //CurrentUser.RoleID = 2;
-                //CurrentUser.UserID = user.UserID;
+                CurrentUser.RoleID = 2;
+                CurrentUser.UserID = user1.ID_пользователя;
                 TimetablePage timetablePage = new TimetablePage();
                 MainWindow menuWindow = new MainWindow
                 {
@@ -64,8 +52,33 @@ namespace Hospital.Windows
                 };
                 menuWindow.MainFrame.Navigate(timetablePage);
                 menuWindow.ShowDialog();
-                var window = Window.GetWindow(this);
-                window?.Hide();
+                this.Close();
+            }
+            else if (user != null)
+            {
+                CurrentUser.RoleID = 3;
+                CurrentUser.UserID = user.ID_пользователя;
+                TimetablePage timetablePage = new TimetablePage();
+                MainWindow menuWindow = new MainWindow
+                {
+                    Title = timetablePage.Title
+                };
+                menuWindow.MainFrame.Navigate(timetablePage);
+                menuWindow.ShowDialog();
+                this.Close();
+            }
+            else if (user2 != null)
+            {
+                CurrentUser.RoleID = 1;
+                CurrentUser.UserID = user2.ID_пользователя;
+                TimetablePage timetablePage = new TimetablePage();
+                MainWindow menuWindow = new MainWindow
+                {
+                    Title = timetablePage.Title
+                };
+                menuWindow.MainFrame.Navigate(timetablePage);
+                menuWindow.ShowDialog();
+                this.Close();
             }
             else
             {

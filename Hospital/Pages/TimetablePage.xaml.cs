@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,27 @@ namespace Hospital.Pages
         public TimetablePage()
         {
             InitializeComponent();
+            if (CurrentUser.RoleID == 3)
+            {
+                add.Visibility = Visibility.Hidden;
+                add.IsEnabled = false;
+                del.Visibility = Visibility.Hidden;
+                del.IsEnabled = false;
+                update.Visibility = Visibility.Hidden;
+                update.IsEnabled = false;
+            }
+            if (CurrentUser.RoleID == 2)
+            {
+                add.Visibility = Visibility.Hidden;
+                add.IsEnabled = false;
+                del.Visibility = Visibility.Hidden;
+                del.IsEnabled = false;
+                update.Visibility = Visibility.Hidden;
+                update.IsEnabled = false;
+
+            }
+
+
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

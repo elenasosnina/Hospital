@@ -27,9 +27,9 @@
             <Button Content="Найти" FontSize="20" Padding="30,5,30,5" HorizontalAlignment="Center" Margin="10,20,10,20"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Добавить" FontSize="20"  Padding="30,5,30,5" Margin="10,0,10,10" Click="Add_Click"/>
-            <Button Content="Удалить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Delete_Click" />
-            <Button Content="Изменить" FontSize="20" Visibility="Hidden"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Change_Click"/>
+            <Button x:Name="add" Content="Добавить" FontSize="20"  Padding="30,5,30,5" Margin="10,0,10,10" Click="Add_Click"/>
+            <Button x:Name="del" Content="Удалить" FontSize="20"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Delete_Click" />
+            <Button x:Name="update" Content="Изменить" FontSize="20" Visibility="Hidden"  Padding="30,5,30,5" Margin="30,0,10,10" Click="Change_Click"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <ListView x:Name="time_table" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="2" BorderBrush="Gray" Margin="0,0,0,30">

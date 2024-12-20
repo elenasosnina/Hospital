@@ -79,6 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
+    <Compile Include="CurrentUser.cs" />
     <Compile Include="Pages\AddTimetablePage.xaml.cs">
       <DependentUpon>AddTimetablePage.xaml</DependentUpon>
     </Compile>
@@ -103,6 +104,7 @@
     <Compile Include="Pages\TimetablePage.xaml.cs">
       <DependentUpon>TimetablePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserInfoConsts.cs" />
     <Compile Include="Windows\FormWindow.xaml.cs">
       <DependentUpon>FormWindow.xaml</DependentUpon>
     </Compile>

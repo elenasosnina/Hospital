@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,24 @@ namespace Hospital.Pages
         public MedCardPage()
         {
             InitializeComponent();
+            if (CurrentUser.RoleID == 3)
+            {
+                add.Visibility = Visibility.Hidden;
+                add.IsEnabled = false;
+                del.Visibility = Visibility.Hidden;
+                del.IsEnabled = false;
+                update.Visibility = Visibility.Hidden;
+                update.IsEnabled = false;
+            }
+            if (CurrentUser.RoleID == 2)
+            {
+                add.Visibility = Visibility.Hidden;
+                add.IsEnabled = false;
+                del.Visibility = Visibility.Hidden;
+                del.IsEnabled = false;
+
+
+            }
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
