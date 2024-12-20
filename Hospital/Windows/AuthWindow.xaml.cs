@@ -52,7 +52,7 @@ namespace Hospital.Windows
                 };
                 menuWindow.MainFrame.Navigate(timetablePage);
                 menuWindow.ShowDialog();
-                this.Close();
+                Close();
             }
             else if (user != null)
             {
@@ -65,7 +65,7 @@ namespace Hospital.Windows
                 };
                 menuWindow.MainFrame.Navigate(timetablePage);
                 menuWindow.ShowDialog();
-                this.Close();
+                Close();
             }
             else if (user2 != null)
             {
@@ -78,16 +78,14 @@ namespace Hospital.Windows
                 };
                 menuWindow.MainFrame.Navigate(timetablePage);
                 menuWindow.ShowDialog();
-                this.Close();
+                Close();
             }
             else
             {
                 MessageBox.Show("Неверный логин или пароль");
                 return;
             }
-            MainWindow m = new MainWindow();
-            m.Show();
-            Close();
+            
         }
     }
 }

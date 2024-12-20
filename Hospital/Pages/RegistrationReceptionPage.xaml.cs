@@ -96,7 +96,10 @@ namespace Hospital.Pages
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            FormWindow form = new FormWindow();
+            FormWindow form = new FormWindow()
+            {
+                Title = "Добавить запись на прием"
+            };
             RegReceptionFormPage page = new RegReceptionFormPage();
             form.FormFrameWindow.Navigate(page);
             form.Show();
@@ -141,7 +144,7 @@ namespace Hospital.Pages
                 RegReceptionFormPage page = new RegReceptionFormPage(selectedItem);
                 FormWindow form = new FormWindow
                 {
-                    Title = "Изменить данные об услуге"
+                    Title = "Изменить запись на прием"
                 };
 
                 form.FormFrameWindow.Navigate(page);

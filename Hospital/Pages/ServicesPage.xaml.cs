@@ -89,7 +89,10 @@ namespace Hospital.Pages
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            FormWindow form = new FormWindow();
+            FormWindow form = new FormWindow()
+            {
+                Title = "Добавить новую услугу"
+            };
             ServiceFormPage page = new ServiceFormPage();
             form.FormFrameWindow.Navigate(page);
             form.Show();

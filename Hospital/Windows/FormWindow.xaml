@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hospital.Windows"
         mc:Ignorable="d"
-        Title="Изменение данных врача" Height="450" Width="400">
+        Title="Изменение данных врача" Height="500" Width="400">
     <Frame x:Name="FormFrameWindow" Source="..\Pages\AddTimetablePage.xaml"/>
 </Window>

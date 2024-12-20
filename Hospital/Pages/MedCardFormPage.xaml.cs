@@ -125,40 +125,17 @@ namespace Hospital.Pages
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
+
        
-        //public void Update(Услуги service, Стоимость_услуг costService)
-        //{
-        //    try
-        //    {
-
-        //        var existingservice = Context.DB.Услуги.Find(service.ID_услуги);
-        //        var existingcost = Context.DB.Стоимость_услуг.Find(costService.ID_стоимости_услуги);
-
-        //        if (existingservice != null && existingcost != null)
-        //        {
-
-        //            existingservice.Название = service.Название.Trim();
-        //            existingcost.Стоимость = costService.Стоимость;
-        //            existingcost.Скидка = costService.Скидка;
-
-        //            Context.DB.SaveChanges();
-        //            MessageBox.Show("Запись успешно обновлена");
-        //            var window = Window.GetWindow(this);
-        //            if (window != null)
-        //            {
-        //                window.Close();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("Не удалось найти медицинскую карту для обновления");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
     }
 }

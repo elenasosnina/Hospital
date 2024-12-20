@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Hospital.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="400"
+      d:DesignHeight="550" d:DesignWidth="400"
       Title="MedCardFormPage">
 
     <Grid>
@@ -28,7 +28,7 @@
             <TextBox   x:Name="result"  Margin="15, 0,15, 10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button   Content="Добавить"  Margin="20,10,15,15" FontSize="14" Click="Add_Click" />
-                <Button Content="Отмена" Margin="15,10,15,15" FontSize="14" />
+                <Button Content="Отмена" Margin="15,10,15,15" FontSize="14" Click="Button_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

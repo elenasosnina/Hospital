@@ -58,7 +58,7 @@
             <ComboBox   x:Name="service"  Margin="15, 0,15, 10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button   Content="Добавить"  Margin="20,10,15,15" FontSize="14" Click="Add_Click" />
-                <Button Content="Отмена" Margin="15,10,15,15" FontSize="14" />
+                <Button Content="Отмена" Margin="15,10,15,15" FontSize="14" Click="Button_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>
