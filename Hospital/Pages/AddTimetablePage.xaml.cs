@@ -60,14 +60,14 @@ namespace Hospital.Pages
                     .ToList();
                 if (startTimes.Count > 0)
                 {
-                    string[] startTimeParts = startTimes.First().ToString().Split(':'); 
+                    string[] startTimeParts = startTimes.First().ToString().Split(':');
                     SH.Text = startTimeParts[0];
-                    SM.Text = startTimeParts.Length > 1 ? startTimeParts[1] : "00"; 
+                    SM.Text = startTimeParts.Length > 1 ? startTimeParts[1] : "00";
                 }
 
-                if (endTimes.Count > 0)
+                if (endTimes.Count <= 0)
                 {
-                    string[] endTimeParts = endTimes.First().ToString().Split(':'); 
+                    string[] endTimeParts = endTimes.First().ToString().Split(':');
                     EH.Text = endTimeParts[0];
                     EM.Text = endTimeParts.Length > 1 ? endTimeParts[1] : "00";
                 }

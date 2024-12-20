@@ -79,6 +79,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddCarPage.xaml.cs">
+      <DependentUpon>AddCarPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddTimetablePage.xaml.cs">
       <DependentUpon>AddTimetablePage.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,9 @@
     </Compile>
     <Compile Include="Pages\TimetablePage.xaml.cs">
       <DependentUpon>TimetablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddCard.xaml.cs">
+      <DependentUpon>AddCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FormWindow.xaml.cs">
       <DependentUpon>FormWindow.xaml</DependentUpon>
@@ -130,6 +136,10 @@
     <Compile Include="Услуги.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddCarPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AddTimetablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TimetablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
