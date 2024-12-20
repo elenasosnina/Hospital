@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hospital.Windows;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -16,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для MedCardPage.xaml
-    /// </summary>
     public partial class MedCardPage : Page
     {
         public MedCardPage()
@@ -46,8 +44,10 @@ namespace Hospital.Pages
                              Пациент=$"{пациент.Фамилия} {пациент.Имя} {пациент.Отчество}",
                              пациент.Дата_рождения,
                              пациент.Пол,
+                             пациент.ID_пациента,
                              медКарта.Номер_карты,
                              медКарта.Группа_крови,
+                             медКарта.ID_медицинской_карты,
                              болезнь.Название,
                              болезньМедКарта.Результат_болезни
                          };
@@ -55,7 +55,81 @@ namespace Hospital.Pages
             time_table.ItemsSource = result.ToList();
         }
 
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            FormWindow form = new FormWindow();
+            MedCardFormPage page = new MedCardFormPage();
+            form.FormFrameWindow.Navigate(page);
+            form.Show();
+            form.Closed += (s, args) =>
+            {
+                Page_Loaded(sender, e);
+            };
+        }
 
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+            dynamic selectedRecord = time_table.SelectedItem;
+            int patientId = selectedRecord.ID_пациента;
+
+            if (patientId > 0)
+            {
+                var medicalCards = Context.DB.Медицинские_карты.Where(mc => mc.ID_пациента == patientId).ToList();
+                foreach (var medicalCard in medicalCards)
+                {
+                    var diseaseCards = Context.DB.Болезни_Медицинская_карта.Where(bm => bm.ID_медицинской_карты == medicalCard.ID_медицинской_карты).ToList();
+                    foreach (var diseaseCard in diseaseCards)
+                    {
+                        Context.DB.Болезни_Медицинская_карта.Remove(diseaseCard);
+                    }
+                    Context.DB.Медицинские_карты.Remove(medicalCard);
+                }
+
+                var patient = Context.DB.Пациенты.FirstOrDefault(p => p.ID_пациента == patientId);
+                if (patient != null)
+                {
+                    Context.DB.Пациенты.Remove(patient);
+                    Context.DB.SaveChanges();
+                    MessageBox.Show("Пациент и связанные записи успешно удалены");
+                    Page_Loaded(sender, e); 
+                }
+                else
+                {
+                    MessageBox.Show("Пациент не найден");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Некорректный ID пациента");
+            }
+        }
+
+        private void Change_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic selectedItem = time_table.SelectedItem;
+            if (selectedItem != null)
+            {
+                MedCardFormPage cardPage = new MedCardFormPage(selectedItem);
+
+                FormWindow authWindow = new FormWindow
+                {
+                    Title = "Изменить данные медицинской карты"
+                };
+
+                authWindow.FormFrameWindow.Navigate(cardPage);
+                authWindow.Show();
+                authWindow.Closed += (s, args) =>
+                {
+                    Page_Loaded(sender, e);
+                };
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Пожалуйста, выберите элемент для обновления");
+            }
+
+        }
 
         private void Timetable_Click(object sender, RoutedEventArgs e)
         {

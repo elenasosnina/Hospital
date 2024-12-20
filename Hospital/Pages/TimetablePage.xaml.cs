@@ -19,9 +19,6 @@ using Hospital.Windows;
 
 namespace Hospital.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для TimetablePage.xaml
-    /// </summary>
     public partial class TimetablePage : Page
     {
         public TimetablePage()
@@ -31,7 +28,10 @@ namespace Hospital.Pages
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            FormWindow form = new FormWindow();
+            FormWindow form = new FormWindow
+            {
+                Title = "Добавить нового врача"
+            }; 
             form.Show();
             form.Closed += (s, args) =>
             {
@@ -63,7 +63,7 @@ namespace Hospital.Pages
             }
             else
             {
-                MessageBox.Show("Книга не найдена");
+                MessageBox.Show("Не найдено");
             }
         }
 
@@ -72,16 +72,11 @@ namespace Hospital.Pages
             dynamic selectedItem = time_table.SelectedItem;
             if (selectedItem != null)
             {
-                // Создаем экземпляр CardPage и передаем выбранную книгу
                 AddTimetablePage cardPage = new AddTimetablePage(selectedItem);
-
-                // Создаем окно авторизации и передаем заголовок
                 FormWindow authWindow = new FormWindow
                 {
                     Title = "Изменить данные врача"
                 };
-
-                // Навигируем на CardPage
                 authWindow.FormFrameWindow.Navigate(cardPage);
                 authWindow.Show();
                 authWindow.Closed += (s, args) =>
@@ -140,7 +135,7 @@ namespace Hospital.Pages
         {
             string search = finder.Text; var searchResult = (from doc in Context.DB.Врачи.Local.ToList()
                                                              join timeTable in Context.DB.Расписание_врачей.Local.ToList() on doc.ID_врача equals timeTable.ID_врача
-                                                             where doc.Фамилия.Contains(search) || doc.Имя.Contains(search)
+                                                             where doc.Фамилия.Contains(search) || doc.Имя.Contains(search) || doc.Специальность.Contains(search) || timeTable.День_недели.Contains(search)
                                                              select new
                                                              {
                                                                  doc.Фамилия,

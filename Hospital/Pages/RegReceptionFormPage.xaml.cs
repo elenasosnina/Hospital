@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Hospital.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для RegReceptionFormPage.xaml
-    /// </summary>
     public partial class RegReceptionFormPage : Page
     {
         private dynamic _selectedItem = null;
@@ -127,12 +124,22 @@ namespace Hospital.Pages
                 Врачи selecteddoc = doctor.SelectedItem as Врачи;
                 Пациенты selectedpatients = patient.SelectedItem as Пациенты;
                 DateTime selectedDate = date.SelectedDate ?? DateTime.Now;
-                int starthours = int.Parse(SH.Text.Trim());
-                int startminutes = int.Parse(SM.Text.Trim());
+
+                if (!int.TryParse(SH.Text.Trim(), out int starthours) || starthours < 0 || starthours > 23)
+                {
+                    throw new Exception("Часы должны быть целым числом от 0 до 23");
+                }
+
+                if (!int.TryParse(SM.Text.Trim(), out int startminutes) || startminutes < 0 || startminutes > 59)
+                {
+                    throw new Exception("Минуты должны быть целым числом от 0 до 59");
+                }
+
                 DateTime dateTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, starthours, startminutes, 0);
+
                 if (selectedservice == null || selecteddoc == null || selectedpatients == null)
                 {
-                    throw new Exception("Не все поля заполнены");
+                    throw new Exception("Не все поля заполнены. Пожалуйста, выберите услугу, врача и пациента");
                 }
 
                 Запись_на_приемы regreception = new Запись_на_приемы
@@ -143,17 +150,17 @@ namespace Hospital.Pages
                     Описание = description.Text.Trim(),
                     Дата_и_время = dateTime
                 };
+
                 if (_selectedItem != null)
                 {
                     regreception.ID_записи_на_прием = _selectedItem.ID_записи_на_прием;
-
                     Update(regreception);
                 }
                 else
                 {
                     Context.DB.Запись_на_приемы.Add(regreception);
                     Context.DB.SaveChanges();
-                    MessageBox.Show("Запись успешно сохранена.");
+                    MessageBox.Show("Запись успешно сохранена");
                     Window parentWindow = Window.GetWindow(this);
                     parentWindow?.Close();
                 }
@@ -163,6 +170,7 @@ namespace Hospital.Pages
                 MessageBox.Show(ex.Message);
             }
         }
+
         public void Update(Запись_на_приемы regreception)
         {
             try
@@ -177,7 +185,7 @@ namespace Hospital.Pages
                     existingnote.ID_услуги = regreception.ID_услуги;
                     existingnote.ID_пациента = regreception.ID_пациента;
                     Context.DB.SaveChanges();
-                    MessageBox.Show("Запись успешно обновлена.");
+                    MessageBox.Show("Запись успешно обновлена");
                     var window = Window.GetWindow(this);
                     if (window != null)
                     {
@@ -186,7 +194,7 @@ namespace Hospital.Pages
                 }
                 else
                 {
-                    throw new Exception("Не удалось запись для обновления.");
+                    throw new Exception("Не удалось запись для обновления");
                 }
             }
             catch (Exception ex)

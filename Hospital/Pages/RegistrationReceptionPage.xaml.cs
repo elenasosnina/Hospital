@@ -143,7 +143,7 @@ namespace Hospital.Pages
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите элемент для обновления.");
+                MessageBox.Show("Пожалуйста, выберите элемент для обновления");
             }
         }
 

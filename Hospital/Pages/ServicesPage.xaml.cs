@@ -20,9 +20,6 @@ using Hospital.Windows;
 
 namespace Hospital.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для ServicesPage.xaml
-    /// </summary>
     public partial class ServicesPage : Page
     {
         public ServicesPage()

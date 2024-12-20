@@ -82,6 +82,9 @@
     <Compile Include="Pages\AddTimetablePage.xaml.cs">
       <DependentUpon>AddTimetablePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MedCardFormPage.xaml.cs">
+      <DependentUpon>MedCardFormPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MedCardPage.xaml.cs">
       <DependentUpon>MedCardPage.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Page Include="Pages\AddTimetablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MedCardFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

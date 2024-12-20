@@ -79,34 +79,60 @@ namespace Hospital.Pages
         {
             try
             {
-                int starthours = int.Parse(SH.Text.Trim());
-                int startminutes = int.Parse(SM.Text.Trim());
-                int startseconds = 0;
-                TimeSpan starttimeSpan = new TimeSpan(starthours, startminutes, startseconds);
-                int endhours = int.Parse(EH.Text.Trim());
-                int endminutes = int.Parse(EM.Text.Trim());
-                int endseconds = 0;
-                TimeSpan endtimeSpan = new TimeSpan(endhours, endminutes, endseconds);
-                Врачи docEntity;
+                if (string.IsNullOrWhiteSpace(doctor.Text) || string.IsNullOrWhiteSpace(speciality.Text) ||
+                    string.IsNullOrWhiteSpace(cabinet.Text) || string.IsNullOrWhiteSpace(days.Text) ||
+                    string.IsNullOrWhiteSpace(SH.Text) || string.IsNullOrWhiteSpace(SM.Text) ||
+                    string.IsNullOrWhiteSpace(EH.Text) || string.IsNullOrWhiteSpace(EM.Text))
+                {
+                    throw new Exception("Все поля должны быть заполнены");
+                }
+
+
+                if (!int.TryParse(SH.Text.Trim(), out int starthours) ||
+                    !int.TryParse(SM.Text.Trim(), out int startminutes) ||
+                    !int.TryParse(EH.Text.Trim(), out int endhours) ||
+                    !int.TryParse(EM.Text.Trim(), out int endminutes))
+                {
+                    throw new Exception("Часы и минуты должны быть числовыми значениями");
+                }
+                if (!int.TryParse(cabinet.Text.Trim(), out int cabinetNumber))
+                {
+                    throw new Exception("Поле 'Кабинет' должно содержать только числовые значения");
+                }
+
+                if (starthours < 0 || starthours > 23 || startminutes < 0 || startminutes > 59 ||
+                    endhours < 0 || endhours > 23 || endminutes < 0 || endminutes > 59)
+                {
+                    throw new Exception("Часы должны быть в диапазоне от 0 до 23, а минуты от 0 до 59");
+                }
+
+                TimeSpan starttimeSpan = new TimeSpan(starthours, startminutes, 0);
+                TimeSpan endtimeSpan = new TimeSpan(endhours, endminutes, 0);
+
+                if (starttimeSpan >= endtimeSpan)
+                {
+                    throw new Exception("Время начала должно быть меньше времени окончания");
+                }
 
                 string[] parts = doctor.Text.Split(' ');
                 if (parts.Length < 3)
                 {
-                    throw new Exception("Неверное представление данных. Убедитесь, что введено как минимум три слова.");
+                    throw new Exception("Неверное представление данных. Убедитесь, что введено как минимум три слова");
                 }
-                
+
                 string surname = parts[0].Trim();
                 string name = parts[1].Trim();
                 string patronymic = parts[2].Trim();
+
                 var existingDoctor = Context.DB.Врачи.FirstOrDefault(a => a.Фамилия == surname && a.Имя == name && a.Отчество == patronymic);
-                docEntity = new Врачи
+
+                Врачи docEntity = new Врачи
                 {
-                    Фамилия = parts[0].Trim(),
-                    Имя = parts[1].Trim(),
-                    Отчество = parts[2].Trim(),
+                    Фамилия = surname,
+                    Имя = name,
+                    Отчество = patronymic,
                     Специальность = speciality.Text.Trim(),
                     Кабинет = cabinet.Text.Trim()
-
                 };
 
                 Расписание_врачей timetableEntity = new Расписание_врачей
@@ -115,18 +141,17 @@ namespace Hospital.Pages
                     День_недели = days.Text.Trim(),
                     Время_начало = starttimeSpan,
                     Время_окончания = endtimeSpan
-
                 };
+
                 if (existingDoctor != null)
                 {
                     docEntity = existingDoctor;
-
                 }
+
                 if (_selectedItem != null)
                 {
                     timetableEntity.ID_расписание = _selectedItem.ID_расписание;
                     docEntity.ID_врача = _selectedItem.ID_врача;
-
                     Update(timetableEntity, docEntity);
                 }
                 else
@@ -134,18 +159,17 @@ namespace Hospital.Pages
                     Context.DB.Врачи.Add(docEntity);
                     Context.DB.Расписание_врачей.Add(timetableEntity);
                     Context.DB.SaveChanges();
-                    MessageBox.Show("Запись успешно сохранена.");
+                    MessageBox.Show("Запись успешно сохранена");
                     Window parentWindow = Window.GetWindow(this);
                     parentWindow?.Close();
                 }
-
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
         public void Update(Расписание_врачей timetable, Врачи doctor)
         {
             try
@@ -156,7 +180,7 @@ namespace Hospital.Pages
                 if (existingdoc != null && existingtimetable != null)
                 {
                     existingtimetable.День_недели = timetable.День_недели.Trim();
-                    existingtimetable.Время_начало= timetable.Время_начало;
+                    existingtimetable.Время_начало = timetable.Время_начало;
                     existingtimetable.Время_окончания = timetable.Время_окончания;
 
                     existingdoc.Имя = doctor.Имя.Trim();
@@ -166,7 +190,7 @@ namespace Hospital.Pages
                     existingdoc.Специальность = doctor.Специальность.Trim();
 
                     Context.DB.SaveChanges();
-                    MessageBox.Show("Запись успешно обновлена.");
+                    MessageBox.Show("Запись успешно обновлена");
                     var window = Window.GetWindow(this);
                     if (window != null)
                     {
@@ -175,7 +199,7 @@ namespace Hospital.Pages
                 }
                 else
                 {
-                    throw new Exception("Не удалось найти врача для обновления.");
+                    throw new Exception("Не удалось найти врача для обновления");
                 }
             }
             catch (Exception ex)
@@ -183,7 +207,8 @@ namespace Hospital.Pages
                 MessageBox.Show(ex.Message);
             }
         }
-        private void doctor_GotFocus(object sender, RoutedEventArgs e)
+
+        private void Doctor_GotFocus(object sender, RoutedEventArgs e)
         {
             if (doctor.Text == "Введите Фамилию Имя Отчество")
                 {
@@ -191,12 +216,21 @@ namespace Hospital.Pages
                 }
         }
 
-        private void doctor_LostFocus(object sender, RoutedEventArgs e)
+        private void Doctor_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(doctor.Text))
                 {
                     doctor.Text = "Введите Фамилию Имя Отчество";
                 }
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.Close();
+            }
         }
     }
 }
